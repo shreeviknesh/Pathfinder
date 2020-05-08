@@ -1,11 +1,11 @@
-async function bfs() {
+async function dfs() {
     let end = board.end;
-    let Queue = [board.start];
+    let Stack = [board.start];
 
     // While the queue has elements, i.e., a path could exist
-    while (Queue.length > 0) {
-        let current = Queue[0];
-        Queue.splice(0, 1);
+    while (Stack.length > 0) {
+        let current = Stack[0];
+        Stack.splice(0, 1);
 
         // FOUND THE END NODE
         if (current == end) {
@@ -13,26 +13,22 @@ async function bfs() {
             return;
         }
 
-        // Checking every neighbor of current node
-        for (let pos of board.getNeighbors(current)) {
-            let node = board.grid[pos[0]][pos[1]];
+        if (current.seen == false) {
+            current.seen = true;
+            current.show(activeColor);
 
-            // IF any of the neighbors is the end, then exit
-            if (node == end) {
-                node.parent = current;
-                await drawPath();
-                return;
-            }
-            if (node.seen == false && node.wall == false) {
-                node.show(activeColor);
-                node.seen = true;
-                node.parent = current;
-                Queue = Queue.concat(node);
+            // CONTROLLING THE FPS by sleeping only if it's an important node
+            await sleep(1000 / fps);
+
+            // Checking every neighbor of current node
+            for (let pos of board.getNeighbors(current)) {
+                let node = board.grid[pos[0]][pos[1]];
+                if (node.seen == false) {
+                    node.parent = current;
+                    Stack.unshift(node);
+                }
             }
         }
-
-        // CONTROLLING THE FPS by sleeping
-        await sleep(1000 / fps);
     }
 
     // NOT FOUND 

@@ -1,6 +1,6 @@
 const canvas = document.getElementById('main-canvas');
 const context = canvas.getContext('2d');
-const fps = 100;
+const fps = 40;
 let scale = 45;
 
 const widthRatio = 0.95;
@@ -15,12 +15,15 @@ const endColor = "#FFDC00";
 const seenColor = "pink";
 const pathColor = "#7FDBFF";
 const wallColor = "#181818";
+const activeColor = "#85144b";
 
 // user controls this using a button
 const diagonals = false;
 let finished = false;
 
 async function initialize() {
+    finished = false;
+    clearInterval(loopID);
     setSize();
     board = new Board();
     show();
@@ -30,14 +33,6 @@ window.onresize = () => {
     clearInterval(loopID);
     initialize();
 }
-
-document.addEventListener('keydown', (event) => {
-    if (event.keyCode == 32) {
-        if (!finished) {
-            bfs();
-        }
-    }
-});
 
 function show() {
     board.show();

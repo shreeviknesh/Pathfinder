@@ -5,6 +5,7 @@ class Cell {
         this.wall = false;
         this.start = false;
         this.end = false;
+
         this.seen = false;
         this.parent = false;
     }

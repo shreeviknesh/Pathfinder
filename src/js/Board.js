@@ -17,10 +17,8 @@ class Board {
         let X2 = parseInt(3 * this.cols / 4);
 
         this.grid[Y][X1].start = true;
-        this.grid[Y][X1].color = 'green';
         this.start = this.grid[Y][X1];
         this.grid[Y][X2].end = true;
-        this.grid[Y][X2].color = 'yellow';
         this.end = this.grid[Y][X2];
     }
 
