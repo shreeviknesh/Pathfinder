@@ -3,7 +3,7 @@ async function dfs() {
     let Stack = [board.start];
 
     // While the queue has elements, i.e., a path could exist
-    while (Stack.length > 0) {
+    while (Stack.length > 0 && !interrupt) {
         let current = Stack[0];
         Stack.splice(0, 1);
 
@@ -23,7 +23,7 @@ async function dfs() {
             // Checking every neighbor of current node
             for (let pos of board.getNeighbors(current)) {
                 let node = board.grid[pos[0]][pos[1]];
-                if (node.seen == false) {
+                if (!node.seen && !node.wall) {
                     node.parent = current;
                     Stack.unshift(node);
                 }
@@ -33,7 +33,6 @@ async function dfs() {
 
     // NOT FOUND 
     clearInterval(loopID);
-    finished = false;
 }
 
 // Drawing the shortest path from end to beginning
@@ -49,8 +48,6 @@ async function drawPath() {
         current = current.parent;
         await sleep(2000 / fps);
     }
-
-    finished = true;
 }
 
 // Helper function

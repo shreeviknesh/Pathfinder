@@ -3,7 +3,7 @@ async function bfs() {
     let Queue = [board.start];
 
     // While the queue has elements, i.e., a path could exist
-    while (Queue.length > 0) {
+    while (Queue.length > 0 && !interrupt) {
         let current = Queue[0];
         Queue.splice(0, 1);
 
@@ -37,7 +37,6 @@ async function bfs() {
 
     // NOT FOUND 
     clearInterval(loopID);
-    finished = false;
 }
 
 // Drawing the shortest path from end to beginning
@@ -53,8 +52,6 @@ async function drawPath() {
         current = current.parent;
         await sleep(2000 / fps);
     }
-
-    finished = true;
 }
 
 // Helper function
