@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pathfinder</title>
 
+    <link rel="stylesheet" href="src/css/buttons.css">
     <link rel="stylesheet" href="src/css/style.css">
 </head>
 
 <body>
-    <span id="startSorting" type="button" class="btn btn-start" onclick="BFS();">BFS</span>
-    <span id="pauseSorting" type="button" class="btn btn-pause" onclick="DFS();">DFS</span>
-    <span id="resetSorting" type="button" class="btn btn-reset" onclick="reset();">Reset</span>
+    <div id="userControls">
+        <span id="BFS" type="button" class="btn btn-start" onclick="BFS();">BFS</span>
+        <span id="DFS" type="button" class="btn btn-start" onclick="DFS();">DFS</span>
+        <span id="resetPathBtn" type="button" class="btn btn-pause" onclick="resetPath();">Clear Path</span>
+        <span id="resetBtn" type="button" class="btn btn-reset" onclick="reset();">Reset</span>
+    </div>
 
     <canvas id="main-canvas"></canvas>
 </body>
