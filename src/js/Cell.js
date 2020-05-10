@@ -3,14 +3,15 @@ class Cell {
         this.x = x;
         this.y = y;
         this.wall = false;
-        this.start = false;
-        this.end = false;
-
         this.seen = false;
         this.parent = false;
+
+        // if this is a start of end node
+        this.start = false;
+        this.end = false;
     }
 
-
+    // Toggle the wall
     toggleWall() {
         if (this.start || this.end) {
             return;
@@ -19,8 +20,11 @@ class Cell {
     }
 
     show(color) {
-        context.strokeStyle = borderColor;
+        // Default fill and stroke
+        context.strokeStyle = defaultBorder;
+        context.fillStyle = defaultColor;
 
+        // Change the fill and stroke if needed
         if (this.start) {
             let image = new Image();
             image.src = startImg;
@@ -41,21 +45,35 @@ class Cell {
         }
         else if (this.wall) {
             context.fillStyle = wallColor;
-            // context.fillRect(this.x * scale + offset, this.y * scale + offset, scale - 2 * offset, scale - 2 * offset);
         }
         else if (color) {
-            context.fillStyle = color;;
-            // context.fillRect(this.x * scale + offset, this.y * scale + offset, scale - 2 * offset, scale - 2 * offset);
+            context.fillStyle = color;
         }
         else if (this.seen) {
             context.fillStyle = seenColor;
-            // context.fillRect(this.x * scale + offset, this.y * scale + offset, scale - 2 * offset, scale - 2 * offset);
-        }
-        else {
-            context.fillStyle = 'white';
         }
 
+        // fill and stroke the rect
         context.strokeRect(this.x * scale + offset, this.y * scale + offset, scale - 2 * offset, scale - 2 * offset);
         context.fillRect(this.x * scale + offset, this.y * scale + offset, scale - 2 * offset, scale - 2 * offset);
+    }
+
+    drawPathLine(next) {
+        context.strokeStyle = pathLineColor;
+        let bx = this.x * scale + scale / 2;
+        let by = this.y * scale + scale / 2;
+        let ex = next.x * scale + scale / 2;
+        let ey = next.y * scale + scale / 2;
+        if (next == board.start) {
+            board.start.show();
+        }
+        if (next == board.end) {
+            board.end.show();
+        }
+        context.beginPath();
+        context.moveTo(bx, by);
+        context.lineTo(ex, ey);
+        context.stroke();
+        context.closePath();
     }
 }

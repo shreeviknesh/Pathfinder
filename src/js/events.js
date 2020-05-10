@@ -1,5 +1,7 @@
 function getGridIndicesFromPos(posx, posy) {
     const rect = canvas.getBoundingClientRect();
+
+    // Return false if the pos is outsize the canvas
     if (posx > rect.left + canvas.width) {
         return false;
     }
@@ -24,6 +26,7 @@ canvas.addEventListener('click', () => {
     }
 });
 
+// A variable to keep track of if the mouse is dragged
 let mouseDragging = false;
 canvas.addEventListener('mousedown', event => {
     if (visualizing) {
@@ -33,6 +36,18 @@ canvas.addEventListener('mousedown', event => {
 });
 
 canvas.addEventListener('mousemove', event => {
+    if (visualizing || !mouseDragging) {
+        return;
+    }
+    let indices = getGridIndicesFromPos(event.clientX, event.clientY);
+    if (indices) {
+        board.addWall(indices.x, indices.y);
+    }
+});
+
+// MObile compatibility
+canvas.addEventListener('touchmove', event => {
+    event.preventDefault();
     if (visualizing || !mouseDragging) {
         return;
     }
