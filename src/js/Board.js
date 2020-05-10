@@ -31,11 +31,20 @@ class Board {
         }
     }
 
-    addWall(posx, posy) {
-        let x = parseInt(posx / scale);
-        let y = parseInt(posy / scale);
+    addWall(x, y) {
+        if (visualizing) {
+            return;
+        }
+        this.grid[y][x].wall = true;
+        this.grid[y][x].show();
+    }
+
+    toggleWall(x, y) {
+        if (visualizing) {
+            return;
+        }
         this.grid[y][x].toggleWall();
-        this.show();
+        this.grid[y][x].show();
     }
 
     getNeighbors(cell) {
@@ -69,7 +78,6 @@ class Board {
         if (j > 0) {
             neighbors.push([i, j - 1]);
         }
-
 
         return neighbors;
     }

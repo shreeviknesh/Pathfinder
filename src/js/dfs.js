@@ -18,7 +18,7 @@ async function dfs() {
             current.show(activeColor);
 
             // CONTROLLING THE FPS by sleeping only if it's an important node
-            await sleep(1000 / fps);
+            await sleep(1000 / fps).then(() => { current.show(seenColor) });
 
             // Checking every neighbor of current node
             for (let pos of board.getNeighbors(current)) {
@@ -30,27 +30,4 @@ async function dfs() {
             }
         }
     }
-
-    // NOT FOUND 
-    clearInterval(loopID);
-}
-
-// Drawing the shortest path from end to beginning
-// this should be called ONLY IF the path exists
-async function drawPath() {
-    clearInterval(loopID);
-    // end
-    let current = board.end.parent;
-
-    // from end to beginning
-    while (current != board.start) {
-        current.show(pathColor);
-        current = current.parent;
-        await sleep(2000 / fps);
-    }
-}
-
-// Helper function
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

@@ -17,6 +17,10 @@ async function bfs() {
         for (let pos of board.getNeighbors(current)) {
             let node = board.grid[pos[0]][pos[1]];
 
+            if (interrupt) {
+                return;
+            }
+
             // IF any of the neighbors is the end, then exit
             if (node == end) {
                 node.parent = current;
@@ -28,33 +32,11 @@ async function bfs() {
                 node.seen = true;
                 node.parent = current;
                 Queue = Queue.concat(node);
+                // await sleep(1000 / fps).then(node.show(seenColor));
+                await sleep(1000 / fps).then(() => {
+                    node.show(seenColor);
+                });
             }
         }
-
-        // CONTROLLING THE FPS by sleeping
-        await sleep(1000 / fps);
     }
-
-    // NOT FOUND 
-    clearInterval(loopID);
-}
-
-// Drawing the shortest path from end to beginning
-// this should be called ONLY IF the path exists
-async function drawPath() {
-    clearInterval(loopID);
-    // end
-    let current = board.end.parent;
-
-    // from end to beginning
-    while (current != board.start) {
-        current.show(pathColor);
-        current = current.parent;
-        await sleep(2000 / fps);
-    }
-}
-
-// Helper function
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
