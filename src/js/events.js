@@ -45,18 +45,6 @@ canvas.addEventListener('mousemove', event => {
     }
 });
 
-// MObile compatibility
-canvas.addEventListener('touchmove', event => {
-    event.preventDefault();
-    if (visualizing || !mouseDragging) {
-        return;
-    }
-    let indices = getGridIndicesFromPos(event.clientX, event.clientY);
-    if (indices) {
-        board.addWall(indices.x, indices.y);
-    }
-});
-
 canvas.addEventListener('mouseup', event => {
     if (visualizing) {
         return;
