@@ -1,36 +1,33 @@
 async function dfs() {
-    let end = board.end;
     let Stack = [board.start];
+    board.end.seen = false;
 
-    // While the queue has elements, i.e., a path could exist
+    // While the Stack has elements, i.e., a path could exist
     while (Stack.length > 0 && !interrupt) {
-        let current = Stack[0];
-        Stack.splice(0, 1);
+        let current = Stack.pop();
+        current.show(visitedColor);
 
-        // FOUND THE END NODE
-        if (current == end) {
+        // IF current is the end, then exit
+        if (current == board.end) {
             await drawPath();
             return;
         }
 
-        // CONTROLLING THE FPS by sleeping only if it's an important node
-        if (current.seen == false) {
-            current.seen = true;
-            current.show(activeColor);
-            await sleep(1000 / fps).then(() => { current.show(seenColor) });
-        }
-
         // Checking every neighbor of current node
         for (let pos of board.getNeighbors(current)) {
+            let node = board.grid[pos[0]][pos[1]];
+
             if (interrupt) {
                 return;
             }
 
-            let node = board.grid[pos[0]][pos[1]];
-            if (!node.seen && !node.wall) {
+            if (node.seen == false && node.wall == false) {
+                node.show(discoveredColor);
+                node.seen = true;
                 node.parent = current;
-                Stack.unshift(node);
+                Stack.push(node);
             }
         }
+        await sleep(1000 / fps);
     }
 }

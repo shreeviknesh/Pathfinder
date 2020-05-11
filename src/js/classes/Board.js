@@ -73,6 +73,18 @@ class Board {
         let j = cell.x;
         let neighbors = [];
 
+        if (i != this.rows - 1) {
+            neighbors.push([i + 1, j]);
+        }
+        if (i > 0) {
+            neighbors.push([i - 1, j]);
+        }
+        if (j != this.cols - 1) {
+            neighbors.push([i, j + 1]);
+        }
+        if (j > 0) {
+            neighbors.push([i, j - 1]);
+        }
         if (diagonals) {
             if (i != 0 && j != this.cols - 1) {
                 neighbors.push([i - 1, j + 1]);
@@ -86,18 +98,6 @@ class Board {
             if (i != this.rows - 1 && j != 0) {
                 neighbors.push([i + 1, j - 1]);
             }
-        }
-        if (i != this.rows - 1) {
-            neighbors.push([i + 1, j]);
-        }
-        if (i > 0) {
-            neighbors.push([i - 1, j]);
-        }
-        if (j != this.cols - 1) {
-            neighbors.push([i, j + 1]);
-        }
-        if (j > 0) {
-            neighbors.push([i, j - 1]);
         }
 
         return neighbors;
