@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Visualization of the various pathfinding algorithms.">
     <title>Pathfinder</title>
 
+    <!-- Custom Stylesheets -->
     <link rel="stylesheet" href="src/css/buttons.css">
     <link rel="stylesheet" href="src/css/style.css">
 </head>
@@ -21,11 +23,19 @@
 </body>
 
 <!-- Custom scripts -->
+<!-- Classes -->
+<script src="src/js/classes/Cell.js"></script>
+<script src="src/js/classes/Board.js"></script>
+
+<!-- All the pathfinding algorithms -->
+<script src="src/js/algorithms/bfs.js"></script>
+<script src="src/js/algorithms/dfs.js"></script>
+
+
+<!-- Main sketch file and other utils -->
 <script src="src/js/utils.js"></script>
-<script src="src/js/Cell.js"></script>
-<script src="src/js/Board.js"></script>
-<script src="src/js/bfs.js"></script>
-<script src="src/js/dfs.js"></script>
 <script src="src/js/sketch.js"></script>
+
+<!-- Following has to be imported after sketch -->
 <script src="src/js/events.js"></script>
 </html>
