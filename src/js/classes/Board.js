@@ -34,7 +34,7 @@ class Board {
         }
     }
 
-    reset() {
+    async reset() {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
                 this.grid[i][j].wall = false;
@@ -57,6 +57,9 @@ class Board {
 
     // Add a cell at a particular index
     addWall(x, y) {
+        if (this.grid[y][x].start == true || this.grid[y][x].end == true) {
+            return;
+        }
         this.grid[y][x].wall = true;
         this.grid[y][x].show();
     }

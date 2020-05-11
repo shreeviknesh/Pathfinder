@@ -14,7 +14,7 @@ async function dfs() {
         }
 
         // Checking every neighbor of current node
-        for (let pos of board.getNeighbors(current)) {
+        for (let pos of board.getNeighbors(current).reverse()) {
             let node = board.grid[pos[0]][pos[1]];
 
             if (interrupt) {

@@ -4,9 +4,8 @@ async function randomMaze(probability) {
         for (let i = 0; i < board.rows && !interrupt; i++) {
             board.grid[i][j].wall = false;
             if (Math.random() <= probability) {
-                board.grid[i][j].wall = true;
+                board.addWall(j, i);
                 await sleep(500 / fps);
-                board.grid[i][j].show();
             }
         }
     }

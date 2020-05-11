@@ -62,12 +62,26 @@ async function resizeFn() {
 window.onresize = resizeFn;
 
 // Wrapper function to call randomMaze
-async function generateRandomMaze() {
+async function generateMaze(algoName) {
     if (doingSomething) {
         return;
     }
     doingSomething = true;
     document.getElementById("resetPathBtn").innerHTML = "Stop";
-    await randomMaze(randomMazeProbability).then(() => { doingSomething = false });
+
+    if (algoName == "random") {
+        await randomMaze(randomMazeProbability).then(() => { doingSomething = false });
+    }
+    else if (algoName == "recdiv") {
+        await recursiveDivision().then(() => { doingSomething = false });
+    }
+    else if (algoName == "voxel") {
+        await voxel().then(() => { doingSomething = false });
+    }
     document.getElementById("resetPathBtn").innerHTML = "Clear Path";
+}
+
+// Random Int function in range [low, high)
+function randInt(low, high) {
+    return Math.floor(Math.random() * (high - low)) + low;
 }

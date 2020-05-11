@@ -15,7 +15,8 @@
     <div id="userControls">
         <span id="BFS" type="button" class="btn btn-start" onclick="pathfinder('bfs');">BFS</span>
         <span id="DFS" type="button" class="btn btn-start" onclick="pathfinder('dfs');">DFS</span>
-        <span id="randomMaze" type="button" class="btn btn-reset" onclick="generateRandomMaze();">Random Maze</span>
+        <span id="randomMaze" type="button" class="btn btn-reset" onclick="generateMaze('random');">Random Maze</span>
+        <span id="recdivMaze" type="button" class="btn btn-reset" onclick="generateMaze('recdiv');">RecDiv Maze</span>
         <span id="resetPathBtn" type="button" class="btn btn-pause" onclick="resetPath();">Clear Path</span>
         <span id="resetBtn" type="button" class="btn btn-reset" onclick="reset();">Reset</span>
     </div>
@@ -32,15 +33,14 @@
 <script src="src/js/algorithms/bfs.js"></script>
 <script src="src/js/algorithms/dfs.js"></script>
 
-<!-- ALl maze generation algorithms -->
-<script src="src/js/maze/random.js"></script>
-<script src="src/js/maze/recursiveDivision.js"></script>
-
-
 <!-- Main sketch file and other utils -->
 <script src="src/js/utils.js"></script>
 <script src="src/js/sketch.js"></script>
 
 <!-- Following has to be imported after sketch -->
 <script src="src/js/events.js"></script>
+
+<!-- ALl maze generation algorithms -->
+<script src="src/js/maze/random.js"></script>
+<script src="src/js/maze/recursiveDivision.js"></script>
 </html>
