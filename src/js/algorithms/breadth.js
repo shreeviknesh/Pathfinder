@@ -1,20 +1,21 @@
-async function dfs() {
-    let Stack = [board.start];
+async function breadthFirstSearch() {
+    let Queue = [board.start];
+    board.start.seen = true;
     board.end.seen = false;
 
-    // While the Stack has elements, i.e., a path could exist
-    while (Stack.length > 0 && !interrupt) {
-        let current = Stack.pop();
+    // While the queue has elements, i.e., a path could exist
+    while (Queue.length > 0 && !interrupt) {
+        let current = Queue.splice(0, 1)[0];
         current.show(visitedColor);
 
-        // IF current is the end, then exit
+        // IF any of the neighbors is the end, then exit
         if (current == board.end) {
             await drawPath();
             return;
         }
 
         // Checking every neighbor of current node
-        for (let pos of board.getNeighbors(current).reverse()) {
+        for (let pos of board.getNeighbors(current)) {
             let node = board.grid[pos[0]][pos[1]];
 
             if (interrupt) {
@@ -25,9 +26,9 @@ async function dfs() {
                 node.show(discoveredColor);
                 node.seen = true;
                 node.parent = current;
-                Stack.push(node);
+                Queue = Queue.concat(node);
+                await sleep(1000 / fps);
             }
         }
-        await sleep(1000 / fps);
     }
 }

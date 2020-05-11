@@ -1,7 +1,7 @@
 const widthRatio = 0.95;
 const heightRatio = 0.9;
 
-const fps = 70;
+const fps = 75;
 let scale = 25;
 let offset = 2.5;
 
@@ -42,11 +42,14 @@ async function pathfinder(algoName) {
         return;
     }
     doingSomething = true;
-    if (algoName == "bfs") {
-        await bfs().then(() => { doingSomething = false });
+    if (algoName == "breadth") {
+        await breadthFirstSearch().then(() => { doingSomething = false });
     }
-    else if (algoName == "dfs") {
-        await dfs().then(() => { doingSomething = false });
+    else if (algoName == "depth") {
+        await depthFirstSearch().then(() => { doingSomething = false });
+    }
+    else if (algoName == "best") {
+        await bestFirstSearch().then(() => { doingSomething = false });
     }
 }
 

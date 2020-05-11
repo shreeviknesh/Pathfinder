@@ -13,8 +13,9 @@
 
 <body>
     <div id="userControls">
-        <span id="BFS" type="button" class="btn btn-start" onclick="pathfinder('bfs');">BFS</span>
-        <span id="DFS" type="button" class="btn btn-start" onclick="pathfinder('dfs');">DFS</span>
+        <span id="BreadthFS" type="button" class="btn btn-start" onclick="pathfinder('breadth');">Beadth FS</span>
+        <span id="DepthFS" type="button" class="btn btn-start" onclick="pathfinder('depth');">Depth FS</span>
+        <span id="BestFS" type="button" class="btn btn-start" onclick="pathfinder('best');">Best FS</span>
         <span id="randomMaze" type="button" class="btn btn-reset" onclick="generateMaze('random');">Random Maze</span>
         <span id="recdivMaze" type="button" class="btn btn-reset" onclick="generateMaze('recdiv');">RecDiv Maze</span>
         <span id="resetPathBtn" type="button" class="btn btn-pause" onclick="resetPath();">Clear Path</span>
@@ -30,8 +31,9 @@
 <script src="src/js/classes/Board.js"></script>
 
 <!-- All the pathfinding algorithms -->
-<script src="src/js/algorithms/bfs.js"></script>
-<script src="src/js/algorithms/dfs.js"></script>
+<script src="src/js/algorithms/breadth.js"></script>
+<script src="src/js/algorithms/depth.js"></script>
+<script src="src/js/algorithms/best.js"></script>
 
 <!-- Main sketch file and other utils -->
 <script src="src/js/utils.js"></script>

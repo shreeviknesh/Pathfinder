@@ -3,6 +3,7 @@ class Board {
         this.rows = parseInt(height / scale);
         this.cols = parseInt(width / scale);
         this.grid = [];
+        this.heuristics = false;
 
         for (let i = 0; i < this.rows; i++) {
             let row = [];
@@ -104,5 +105,18 @@ class Board {
         }
 
         return neighbors;
+    }
+
+    async initializeHeuristics() {
+        if (this.heuristics) {
+            return;
+        }
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                this.grid[i][j].heuristic = Math.abs(this.grid[i][j].x - this.end.x) + Math.abs(this.grid[i][j].y - this.end.y);
+            }
+        }
+
+        this.heuristics = true;
     }
 }
