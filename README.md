@@ -3,6 +3,6 @@ A web-application to visualize the various pathfinding algorithms, made using Va
 
 TODO
 ----
-- Best First
-- Dijkstra's
-- A*
+- [x] Best First
+- [ ] Dijkstra's
+- [ ] A*
