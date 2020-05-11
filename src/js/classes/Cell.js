@@ -9,10 +9,6 @@ class Cell {
         // if this is a start of end node
         this.start = false;
         this.end = false;
-
-        if (Math.random() > 0.5 && randomInit) {
-            this.wall = true;
-        }
     }
 
     // Toggle the wall

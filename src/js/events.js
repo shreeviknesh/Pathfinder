@@ -17,7 +17,7 @@ function getGridIndicesFromPos(posx, posy) {
 }
 
 canvas.addEventListener('click', () => {
-    if (visualizing) {
+    if (doingSomething) {
         return;
     }
     let indices = getGridIndicesFromPos(event.clientX, event.clientY);
@@ -29,14 +29,14 @@ canvas.addEventListener('click', () => {
 // A variable to keep track of if the mouse is dragged
 let mouseDragging = false;
 canvas.addEventListener('mousedown', event => {
-    if (visualizing) {
+    if (doingSomething) {
         return;
     }
     mouseDragging = true;
 });
 
 canvas.addEventListener('mousemove', event => {
-    if (visualizing || !mouseDragging) {
+    if (doingSomething || !mouseDragging) {
         return;
     }
     let indices = getGridIndicesFromPos(event.clientX, event.clientY);
@@ -46,7 +46,7 @@ canvas.addEventListener('mousemove', event => {
 });
 
 canvas.addEventListener('mouseup', event => {
-    if (visualizing) {
+    if (doingSomething) {
         return;
     }
     mouseDragging = false;

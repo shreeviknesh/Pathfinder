@@ -33,3 +33,41 @@ async function drawPath() {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+// Resets the board i.e., the path and the walls
+async function reset() {
+    interrupt = true;
+    await sleep(1005 / fps);
+    board.reset();
+    interrupt = false;
+}
+
+// Removes the path 
+async function resetPath() {
+    interrupt = true;
+    await sleep(1005 / fps);
+    board.clearPath();
+    interrupt = false;
+}
+
+// A new board is generated when the window is resized
+async function resizeFn() {
+    interrupt = true;
+    await sleep(1005 / fps);
+    setSize();
+    board = new Board();
+    board.show();
+    interrupt = false;
+}
+window.onresize = resizeFn;
+
+// Wrapper function to call randomMaze
+async function generateRandomMaze() {
+    if (doingSomething) {
+        return;
+    }
+    doingSomething = true;
+    document.getElementById("resetPathBtn").innerHTML = "Stop";
+    await randomMaze(randomMazeProbability).then(() => { doingSomething = false });
+    document.getElementById("resetPathBtn").innerHTML = "Clear Path";
+}

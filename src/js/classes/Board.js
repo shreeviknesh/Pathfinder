@@ -40,10 +40,6 @@ class Board {
                 this.grid[i][j].wall = false;
                 this.grid[i][j].seen = false;
                 this.grid[i][j].parent = false;
-
-                if (Math.random() > 0.5 && randomInit) {
-                    this.grid[i][j].wall = true;
-                }
             }
         }
         this.show();
@@ -61,18 +57,12 @@ class Board {
 
     // Add a cell at a particular index
     addWall(x, y) {
-        if (visualizing) {
-            return;
-        }
         this.grid[y][x].wall = true;
         this.grid[y][x].show();
     }
 
     // Toggle wall at particular index
     toggleWall(x, y) {
-        if (visualizing) {
-            return;
-        }
         this.grid[y][x].toggleWall();
         this.grid[y][x].show();
     }

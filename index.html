@@ -13,8 +13,9 @@
 
 <body>
     <div id="userControls">
-        <span id="BFS" type="button" class="btn btn-start" onclick="BFS();">BFS</span>
-        <span id="DFS" type="button" class="btn btn-start" onclick="DFS();">DFS</span>
+        <span id="BFS" type="button" class="btn btn-start" onclick="pathfinder('bfs');">BFS</span>
+        <span id="DFS" type="button" class="btn btn-start" onclick="pathfinder('dfs');">DFS</span>
+        <span id="randomMaze" type="button" class="btn btn-reset" onclick="generateRandomMaze();">Random Maze</span>
         <span id="resetPathBtn" type="button" class="btn btn-pause" onclick="resetPath();">Clear Path</span>
         <span id="resetBtn" type="button" class="btn btn-reset" onclick="reset();">Reset</span>
     </div>
@@ -30,6 +31,10 @@
 <!-- All the pathfinding algorithms -->
 <script src="src/js/algorithms/bfs.js"></script>
 <script src="src/js/algorithms/dfs.js"></script>
+
+<!-- ALl maze generation algorithms -->
+<script src="src/js/maze/random.js"></script>
+<script src="src/js/maze/recursiveDivision.js"></script>
 
 
 <!-- Main sketch file and other utils -->

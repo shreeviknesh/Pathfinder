@@ -11,14 +11,17 @@ const context = canvas.getContext('2d');
 let width, height;
 let board;
 
+const randomMazeProbability = 0.43;
+
+// Colors and images
 const startImg = "src/img/start.svg";
 const endImg = "src/img/end.svg";
 
 const startColor = "#01FF70";
 const endColor = "#FFDC00";
-const seenColor = "#EDC8FE";
+const discoveredColor = "#98FB98";
+const visitedColor = "#EDC8FE";
 const wallColor = "#343837";
-const activeColor = "#98FB98";
 
 const defaultBorder = "#247AFD";
 const defaultColor = "#f5f5f5";
@@ -31,44 +34,20 @@ const diagonals = true;
 const randomInit = true;
 
 let interrupt = false;
-let visualizing = false;
+let doingSomething = false;
 
-async function BFS() {
-    interrupt = false;
-    visualizing = true;
-    await bfs().then(() => { visualizing = false });
-}
-
-async function DFS() {
-    interrupt = false;
-    visualizing = true;
-    await dfs().then(() => { visualizing = false });
-}
-
-window.onresize = () => {
-    resizeFn();
-}
-
-async function reset() {
-    interrupt = true;
-    await sleep(1005 / fps);
-    board.reset();
-    interrupt = false;
-}
-
-async function resetPath() {
-    interrupt = true;
-    await sleep(1005 / fps);
-    board.clearPath();
-    interrupt = false;
-}
-
-async function resizeFn() {
-    interrupt = true;
-    await sleep(1005 / fps);
-    setSize();
-    board = new Board();
-    board.show();
+// Wrapper function for all pathfinding algorithms
+async function pathfinder(algoName) {
+    if (doingSomething) {
+        return;
+    }
+    doingSomething = true;
+    if (algoName == "bfs") {
+        await bfs().then(() => { doingSomething = false });
+    }
+    else if (algoName == "dfs") {
+        await dfs().then(() => { doingSomething = false });
+    }
 }
 
 setSize();
