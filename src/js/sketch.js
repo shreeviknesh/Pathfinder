@@ -1,8 +1,8 @@
 const widthRatio = 0.95;
 const heightRatio = 0.9;
 
-const fps = 90;
-let scale = 40;
+const fps = 70;
+let scale = 25;
 let offset = 2.5;
 
 const canvas = document.getElementById('main-canvas');
