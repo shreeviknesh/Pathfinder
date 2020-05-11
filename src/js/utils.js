@@ -20,12 +20,11 @@ async function drawPath() {
     }
     path.unshift(board.start);
 
-    for (let i = 1; i < path.length - 1; i++) {
-        path[i].show(pathColor);
+    for (let i = 1; i < path.length; i++) {
+        await path[i].show(pathColor);
 
-        // draw a path
-        path[i].drawPathLine(path[i - 1]);
-        path[i].drawPathLine(path[i + 1]);
+        // draw a path from this to prev
+        await path[i].drawPathLine(path[i - 1]);
         await sleep(2500 / fps);
     }
 }

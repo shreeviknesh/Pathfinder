@@ -13,20 +13,23 @@ async function dfs() {
             return;
         }
 
+        // CONTROLLING THE FPS by sleeping only if it's an important node
         if (current.seen == false) {
             current.seen = true;
             current.show(activeColor);
-
-            // CONTROLLING THE FPS by sleeping only if it's an important node
             await sleep(1000 / fps).then(() => { current.show(seenColor) });
+        }
 
-            // Checking every neighbor of current node
-            for (let pos of board.getNeighbors(current)) {
-                let node = board.grid[pos[0]][pos[1]];
-                if (!node.seen && !node.wall) {
-                    node.parent = current;
-                    Stack.unshift(node);
-                }
+        // Checking every neighbor of current node
+        for (let pos of board.getNeighbors(current)) {
+            if (interrupt) {
+                return;
+            }
+
+            let node = board.grid[pos[0]][pos[1]];
+            if (!node.seen && !node.wall) {
+                node.parent = current;
+                Stack.unshift(node);
             }
         }
     }

@@ -9,6 +9,10 @@ class Cell {
         // if this is a start of end node
         this.start = false;
         this.end = false;
+
+        if (Math.random() > 0.5 && randomInit) {
+            this.wall = true;
+        }
     }
 
     // Toggle the wall
@@ -19,7 +23,7 @@ class Cell {
         this.wall = !(this.wall);
     }
 
-    show(color) {
+    async show(color) {
         // Default fill and stroke
         context.strokeStyle = defaultBorder;
         context.fillStyle = defaultColor;
@@ -58,22 +62,24 @@ class Cell {
         context.fillRect(this.x * scale + offset, this.y * scale + offset, scale - 2 * offset, scale - 2 * offset);
     }
 
-    drawPathLine(next) {
+    async drawPathLine(prev) {
         context.strokeStyle = pathLineColor;
         let bx = this.x * scale + scale / 2;
         let by = this.y * scale + scale / 2;
-        let ex = next.x * scale + scale / 2;
-        let ey = next.y * scale + scale / 2;
-        if (next == board.start) {
-            board.start.show();
-        }
-        if (next == board.end) {
-            board.end.show();
-        }
+        let ex = prev.x * scale + scale / 2;
+        let ey = prev.y * scale + scale / 2;
+
         context.beginPath();
         context.moveTo(bx, by);
         context.lineTo(ex, ey);
         context.stroke();
         context.closePath();
+
+        if (prev == board.start) {
+            board.start.show();
+        }
+        if (this == board.end) {
+            board.end.show();
+        }
     }
 }

@@ -27,6 +27,7 @@ async function bfs() {
                 await drawPath();
                 return;
             }
+
             if (node.seen == false && node.wall == false) {
                 node.show(activeColor);
                 node.seen = true;
