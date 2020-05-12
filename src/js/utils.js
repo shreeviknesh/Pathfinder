@@ -1,3 +1,29 @@
+// Wrapper function for all pathfinding algorithms
+async function pathfinder(algoName) {
+    if (doingSomething) {
+        return;
+    }
+    doingSomething = true;
+    if (algoName == "breadth") {
+        await breadthFirstSearch().then(() => { doingSomething = false });
+    }
+    else if (algoName == "depth") {
+        await depthFirstSearch().then(() => { doingSomething = false });
+    }
+    else if (algoName == "best") {
+        await board.initializeHeuristics();
+        await bestFirstSearch().then(() => { doingSomething = false });
+    }
+    else if (algoName == "astar") {
+        await board.initializeHeuristics();
+        await astar().then(() => { doingSomething = false });
+    }
+    else if (algoName == "dijkstra") {
+        await board.initializeHeuristics();
+        await dijkstra().then(() => { doingSomething = false });
+    }
+}
+
 // Sets the size of the canvas
 async function setSize() {
     width = (window.innerWidth * widthRatio) - ((window.innerWidth * widthRatio) % scale);
@@ -20,7 +46,7 @@ async function drawPath() {
     }
     path.unshift(board.start);
 
-    for (let i = 1; i < path.length; i++) {
+    for (let i = 1; i < path.length && !interrupt; i++) {
         await path[i].show(pathColor);
 
         // draw a path from this to prev
@@ -84,4 +110,15 @@ async function generateMaze(algoName) {
 // Random Int function in range [low, high)
 function randInt(low, high) {
     return Math.floor(Math.random() * (high - low)) + low;
+}
+
+// helper function to insert node into priority queue
+async function PQinsert(PriorityQueue, node) {
+    for (let i = 0; i < PriorityQueue.length; i++) {
+        if (node.hScore + node.gScore < PriorityQueue[i].hScore + PriorityQueue[i].gScore) {
+            PriorityQueue.splice(i, 0, node);
+            return;
+        }
+    }
+    PriorityQueue.push(node);
 }

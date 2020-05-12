@@ -31,27 +31,9 @@ const pathLineColor = "#FD4659";
 
 // user controls this using a button
 const diagonals = true;
-const randomInit = true;
 
 let interrupt = false;
 let doingSomething = false;
-
-// Wrapper function for all pathfinding algorithms
-async function pathfinder(algoName) {
-    if (doingSomething) {
-        return;
-    }
-    doingSomething = true;
-    if (algoName == "breadth") {
-        await breadthFirstSearch().then(() => { doingSomething = false });
-    }
-    else if (algoName == "depth") {
-        await depthFirstSearch().then(() => { doingSomething = false });
-    }
-    else if (algoName == "best") {
-        await bestFirstSearch().then(() => { doingSomething = false });
-    }
-}
 
 setSize();
 board = new Board();

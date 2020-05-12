@@ -108,15 +108,22 @@ class Board {
     }
 
     async initializeHeuristics() {
+        // if heuristics are already initialized, reset the gScore
         if (this.heuristics) {
-            return;
-        }
-        for (let i = 0; i < this.rows; i++) {
-            for (let j = 0; j < this.cols; j++) {
-                this.grid[i][j].heuristic = Math.abs(this.grid[i][j].x - this.end.x) + Math.abs(this.grid[i][j].y - this.end.y);
+            for (let i = 0; i < this.rows; i++) {
+                for (let j = 0; j < this.cols; j++) {
+                    this.grid[i][j].gScore = 0;
+                }
             }
         }
-
-        this.heuristics = true;
+        else {
+            for (let i = 0; i < this.rows; i++) {
+                for (let j = 0; j < this.cols; j++) {
+                    this.grid[i][j].gScore = 0;
+                    this.grid[i][j].hScore = Math.abs(this.grid[i][j].x - this.end.x) + Math.abs(this.grid[i][j].y - this.end.y);
+                }
+            }
+            this.heuristics = true;
+        }
     }
 }
