@@ -1,7 +1,7 @@
 // helper function to insert node into priority queue for dijkstra
 async function DijkstraPQinsert(PriorityQueue, node) {
     for (let i = 0; i < PriorityQueue.length; i++) {
-        if (node.gScore < PriorityQueue[i].gScore) {
+        if (node.gScore + node.weight < PriorityQueue[i].gScore + PriorityQueue[i].weight) {
             PriorityQueue.splice(i, 0, node);
             return;
         }

@@ -41,6 +41,7 @@ class Board {
                 this.grid[i][j].wall = false;
                 this.grid[i][j].seen = false;
                 this.grid[i][j].parent = false;
+                this.grid[i][j].weight = 0;
             }
         }
         this.show();
@@ -62,6 +63,15 @@ class Board {
             return;
         }
         this.grid[y][x].wall = true;
+        this.grid[y][x].weight = Infinity;
+        this.grid[y][x].show();
+    }
+
+    addWeight(x, y) {
+        if (this.grid[y][x].start == true || this.grid[y][x].end == true || this.grid[y][x].wall == true) {
+            return;
+        }
+        this.grid[y][x].weight = weightValue;
         this.grid[y][x].show();
     }
 

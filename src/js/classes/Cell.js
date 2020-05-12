@@ -6,6 +6,8 @@ class Cell {
         this.seen = false;
         this.parent = false;
 
+        this.weight = 0;
+
         // if this is a start of end node
         this.start = false;
         this.end = false;
@@ -16,11 +18,19 @@ class Cell {
         if (this.start || this.end) {
             return;
         }
-        this.wall = !(this.wall);
+        if (this.wall) {
+            this.wall = false;
+            this.weight = 0;
+        }
+        else {
+            this.wall = true;
+            this.weight = Infinity;
+        }
     }
 
     async show(color) {
         // Default fill and stroke
+        context.lineWidth = 1;
         context.strokeStyle = defaultBorder;
         context.fillStyle = defaultColor;
 
@@ -53,12 +63,21 @@ class Cell {
             context.fillStyle = seenColor;
         }
 
+        if (this.weight != 0) {
+            context.lineWidth = weightValue;
+            context.strokeStyle = weightBorder;
+        }
+        else {
+            context.lineWidth = 1;
+        }
+
         // fill and stroke the rect
         context.strokeRect(this.x * scale + offset, this.y * scale + offset, scale - 2 * offset, scale - 2 * offset);
         context.fillRect(this.x * scale + offset, this.y * scale + offset, scale - 2 * offset, scale - 2 * offset);
     }
 
     async drawPathLine(prev) {
+        context.lineWidth = 1;
         context.strokeStyle = pathLineColor;
         let bx = this.x * scale + scale / 2;
         let by = this.y * scale + scale / 2;

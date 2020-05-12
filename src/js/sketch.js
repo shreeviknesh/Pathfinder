@@ -12,6 +12,7 @@ let width, height;
 let board;
 
 const randomMazeProbability = 0.43;
+const weightValue = 1.5;
 
 // Colors and images
 const startImg = "src/img/start.svg";
@@ -22,6 +23,8 @@ const endColor = "#FFDC00";
 const discoveredColor = "#98FB98";
 const visitedColor = "#EDC8FE";
 const wallColor = "#343837";
+
+const weightBorder = "#02066F";
 
 const defaultBorder = "#247AFD";
 const defaultColor = "#f5f5f5";

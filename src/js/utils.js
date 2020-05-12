@@ -5,9 +5,11 @@ async function pathfinder(algoName) {
     }
     doingSomething = true;
     if (algoName == "breadth") {
+        await board.reset();
         await breadthFirstSearch().then(() => { doingSomething = false });
     }
     else if (algoName == "depth") {
+        await board.reset();
         await depthFirstSearch().then(() => { doingSomething = false });
     }
     else if (algoName == "best") {
@@ -51,7 +53,7 @@ async function drawPath() {
 
         // draw a path from this to prev
         await path[i].drawPathLine(path[i - 1]);
-        await sleep(2500 / fps);
+        await sleep(1000 / fps);
     }
 }
 
@@ -101,8 +103,8 @@ async function generateMaze(algoName) {
     else if (algoName == "recdiv") {
         await recursiveDivision().then(() => { doingSomething = false });
     }
-    else if (algoName == "voxel") {
-        await voxel().then(() => { doingSomething = false });
+    else if (algoName == "randomWeight") {
+        await randomWeightMaze(randomMazeProbability).then(() => { doingSomething = false });
     }
     document.getElementById("resetPathBtn").innerHTML = "Clear Path";
 }
@@ -110,15 +112,4 @@ async function generateMaze(algoName) {
 // Random Int function in range [low, high)
 function randInt(low, high) {
     return Math.floor(Math.random() * (high - low)) + low;
-}
-
-// helper function to insert node into priority queue
-async function PQinsert(PriorityQueue, node) {
-    for (let i = 0; i < PriorityQueue.length; i++) {
-        if (node.hScore + node.gScore < PriorityQueue[i].hScore + PriorityQueue[i].gScore) {
-            PriorityQueue.splice(i, 0, node);
-            return;
-        }
-    }
-    PriorityQueue.push(node);
 }

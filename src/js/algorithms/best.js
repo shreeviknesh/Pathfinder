@@ -1,3 +1,14 @@
+// helper function to insert node into priority queue
+async function bestFirstPQinsert(PriorityQueue, node) {
+    for (let i = 0; i < PriorityQueue.length; i++) {
+        if (node.hScore + node.weight < PriorityQueue[i].hScore + PriorityQueue[i].weight) {
+            PriorityQueue.splice(i, 0, node);
+            return;
+        }
+    }
+    PriorityQueue.push(node);
+}
+
 async function bestFirstSearch() {
     let PriorityQueue = [board.start];
     board.start.seen = true;
@@ -22,7 +33,7 @@ async function bestFirstSearch() {
                 node.show(discoveredColor);
                 node.seen = true;
                 node.parent = current;
-                PQinsert(PriorityQueue, node);
+                bestFirstPQinsert(PriorityQueue, node);
                 await sleep(1000 / fps);
             }
         }

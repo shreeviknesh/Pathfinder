@@ -1,3 +1,14 @@
+// helper function to insert node into priority queue
+async function AstarPQinsert(PriorityQueue, node) {
+    for (let i = 0; i < PriorityQueue.length; i++) {
+        if (node.hScore + node.gScore + node.weight < PriorityQueue[i].hScore + PriorityQueue[i].gScore + PriorityQueue[i].weight) {
+            PriorityQueue.splice(i, 0, node);
+            return;
+        }
+    }
+    PriorityQueue.push(node);
+}
+
 async function astar() {
     let PriorityQueue = [board.start];
     board.start.seen = true;
@@ -23,8 +34,8 @@ async function astar() {
                 node.show(discoveredColor);
                 node.seen = true;
                 node.parent = current;
-                node.gScore = current.gScore + 1;
-                PQinsert(PriorityQueue, node);
+                node.gScore = current.weight + current.gScore + 1;
+                AstarPQinsert(PriorityQueue, node);
                 await sleep(1000 / fps);
             }
         }
