@@ -12,7 +12,7 @@ async function randomMaze(probability) {
 }
 
 async function randomWeightMaze(probability) {
-    // board.reset();
+    board.reset();
     for (let j = 0; j < board.cols && !interrupt; j++) {
         for (let i = 0; i < board.rows && !interrupt; i++) {
             board.grid[i][j].weight = 0;
