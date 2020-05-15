@@ -28,6 +28,22 @@ class Cell {
         }
     }
 
+    async visitNode() {
+        sleep(2500 / fps).then(() => {
+            this.show(visitedColor);
+        });
+    }
+
+    async discoverNode(parent) {
+        this.seen = true;
+        this.parent = parent;
+        this.show(activeColor);
+        sleep(2500 / fps).then(() => {
+            this.show(discoveredColor);
+        });
+        await sleep(1000 / fps);
+    }
+
     async show(color) {
         // Default fill and stroke
         context.lineWidth = 1;
