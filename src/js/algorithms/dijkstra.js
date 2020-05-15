@@ -40,7 +40,7 @@ async function dijkstra() {
                 node.show(discoveredColor);
                 node.seen = true;
                 node.parent = current;
-                node.gScore = current.gScore;
+                node.gScore = current.gScore + current.weight;
                 DijkstraPQinsert(PriorityQueue, node);
                 await sleep(1000 / fps);
             }
