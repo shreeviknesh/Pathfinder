@@ -1,8 +1,11 @@
+const algoField = document.getElementById('pathfindingAlgo');
+
 // Wrapper function for all pathfinding algorithms
-async function pathfinder(algoName) {
+async function pathfinder() {
     if (doingSomething) {
         return;
     }
+    algoName = algoField.value;
     doingSomething = true;
     if (algoName == "breadth") {
         await board.resetWeights();

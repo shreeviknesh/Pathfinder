@@ -8,19 +8,29 @@
 
     <!-- Custom Stylesheets -->
     <link rel="stylesheet" href="src/css/buttons.css">
+    <link rel="stylesheet" href="src/css/dropdown.css">
     <link rel="stylesheet" href="src/css/style.css">
 </head>
 
 <body>
     <div id="userControls">
-        <span id="BreadthFS" type="button" class="btn btn-start" onclick="pathfinder('breadth');">Beadth FS</span>
-        <span id="DepthFS" type="button" class="btn btn-start" onclick="pathfinder('depth');">Depth FS</span>
-        <span id="BestFS" type="button" class="btn btn-start" onclick="pathfinder('best');">Best FS</span>
-        <span id="AStar" type="button" class="btn btn-start" onclick="pathfinder('astar');">A*</span>
-        <span id="Dijkstra" type="button" class="btn btn-start" onclick="pathfinder('dijkstra');">Dijkstra</span>
-        <span id="randomMaze" type="button" class="btn btn-reset" onclick="generateMaze('random');">Random Wall Maze</span>
-        <span id="recdivMaze" type="button" class="btn btn-reset" onclick="generateMaze('recdiv');">RecDiv Maze</span>
-        <span id="randomWeight" type="button" class="btn btn-reset" onclick="generateMaze('randomWeight');">Random Weight Maze</span>
+        <div class="dropdown">
+            <select name="pathfindingAlgo" class="dropdown-select" id="pathfindingAlgo" onchange="initialize();">
+                <option value="breadth">Breadth First Search</option>
+                <option value="depth">Depth First Search</option>
+                <option value="best">Best First Search</option>
+                <option value="astar">A* Algorithm</option>
+                <option value="dijkstra">Dijkstra's Algorithm</option>
+            </select>
+        </div>
+        <span id="visualize" type="button" class="btn btn-start" onclick="pathfinder();">Visualize</span>
+
+        <br class="mobile-break">
+        <span id="randomMaze" type="button" class="btn btn-start" onclick="generateMaze('random');">Random Wall Maze</span>
+        <span id="recdivMaze" type="button" class="btn btn-start" onclick="generateMaze('recdiv');">RecDiv Maze</span>
+        <span id="randomWeight" type="button" class="btn btn-start" onclick="generateMaze('randomWeight');">Random Weight Maze</span>
+
+        <br class="mobile-break">
         <span id="resetPathBtn" type="button" class="btn btn-pause" onclick="resetPath();">Clear Path</span>
         <span id="resetBtn" type="button" class="btn btn-reset" onclick="reset();">Reset</span>
     </div>
