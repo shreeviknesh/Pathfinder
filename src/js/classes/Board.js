@@ -70,6 +70,9 @@ class Board {
 
     // Add a cell at a particular index
     addWall(x, y) {
+        if (y >= this.rows || x >= this.cols || y < 0 || x < 0) {
+            return;
+        }
         if (this.grid[y][x].start == true || this.grid[y][x].end == true) {
             return;
         }
@@ -79,6 +82,9 @@ class Board {
     }
 
     addWeight(x, y) {
+        if (y >= this.rows || x >= this.cols || y < 0 || x < 0) {
+            return;
+        }
         if (this.grid[y][x].start == true || this.grid[y][x].end == true || this.grid[y][x].wall == true) {
             return;
         }
@@ -88,6 +94,9 @@ class Board {
 
     // Toggle wall at particular index
     toggleWall(x, y) {
+        if (y >= this.rows || x >= this.cols || y < 0 || x < 0) {
+            return;
+        }
         this.grid[y][x].toggleWall();
         this.grid[y][x].show();
     }

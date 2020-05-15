@@ -16,7 +16,7 @@ async function astar() {
 
     while (PriorityQueue.length > 0 && !interrupt) {
         let current = PriorityQueue.splice(0, 1)[0];
-        current.show(visitedColor);
+        current.visitNode();
 
         if (current == board.end) {
             await drawPath();
@@ -31,9 +31,7 @@ async function astar() {
             }
 
             if (node.seen == false && node.wall == false) {
-                node.show(discoveredColor);
-                node.seen = true;
-                node.parent = current;
+                node.discoverNode(current);
                 node.gScore = current.weight + current.gScore + 1;
                 AstarPQinsert(PriorityQueue, node);
                 await sleep(1000 / fps);

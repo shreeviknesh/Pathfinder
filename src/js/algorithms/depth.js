@@ -5,7 +5,7 @@ async function depthFirstSearch() {
     // While the Stack has elements, i.e., a path could exist
     while (Stack.length > 0 && !interrupt) {
         let current = Stack.pop();
-        current.show(visitedColor);
+        current.visitNode();
 
         // IF current is the end, then exit
         if (current == board.end) {
@@ -22,9 +22,7 @@ async function depthFirstSearch() {
             }
 
             if (node.seen == false && node.wall == false) {
-                node.show(discoveredColor);
-                node.seen = true;
-                node.parent = current;
+                node.discoverNode(current);
                 Stack.push(node);
             }
         }

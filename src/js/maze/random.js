@@ -5,7 +5,7 @@ async function randomMaze(probability) {
             board.grid[i][j].wall = false;
             if (Math.random() <= probability) {
                 board.addWall(j, i);
-                await sleep(500 / fps);
+                await sleep(400 / fps);
             }
         }
     }
@@ -18,7 +18,7 @@ async function randomWeightMaze(probability) {
             board.grid[i][j].weight = 0;
             if (Math.random() <= probability * 1.24) {
                 board.addWeight(j, i);
-                await sleep(500 / fps);
+                await sleep(400 / fps);
             }
         }
     }

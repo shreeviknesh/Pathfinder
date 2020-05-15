@@ -15,7 +15,7 @@ async function bestFirstSearch() {
 
     while (PriorityQueue.length > 0 && !interrupt) {
         let current = PriorityQueue.splice(0, 1)[0];
-        current.show(visitedColor);
+        current.visitNode();
 
         if (current == board.end) {
             await drawPath();
@@ -30,9 +30,7 @@ async function bestFirstSearch() {
             }
 
             if (node.seen == false && node.wall == false) {
-                node.show(discoveredColor);
-                node.seen = true;
-                node.parent = current;
+                node.discoverNode(current);
                 bestFirstPQinsert(PriorityQueue, node);
                 await sleep(1000 / fps);
             }

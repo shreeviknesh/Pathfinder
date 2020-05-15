@@ -6,7 +6,7 @@ async function breadthFirstSearch() {
     // While the queue has elements, i.e., a path could exist
     while (Queue.length > 0 && !interrupt) {
         let current = Queue.splice(0, 1)[0];
-        current.show(visitedColor);
+        await current.visitNode();
 
         // IF any of the neighbors is the end, then exit
         if (current == board.end) {
@@ -23,11 +23,9 @@ async function breadthFirstSearch() {
             }
 
             if (node.seen == false && node.wall == false) {
-                node.show(discoveredColor);
-                node.seen = true;
-                node.parent = current;
+                // node was discovered from current node
+                await node.discoverNode(current);
                 Queue = Queue.concat(node);
-                await sleep(1000 / fps);
             }
         }
     }
