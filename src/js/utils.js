@@ -5,11 +5,11 @@ async function pathfinder(algoName) {
     }
     doingSomething = true;
     if (algoName == "breadth") {
-        await board.reset();
+        await board.resetWeights();
         await breadthFirstSearch().then(() => { doingSomething = false });
     }
     else if (algoName == "depth") {
-        await board.reset();
+        await board.resetWeights();
         await depthFirstSearch().then(() => { doingSomething = false });
     }
     else if (algoName == "best") {

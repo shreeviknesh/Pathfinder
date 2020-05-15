@@ -47,6 +47,17 @@ class Board {
         this.show();
     }
 
+    async resetWeights() {
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                this.grid[i][j].seen = false;
+                this.grid[i][j].parent = false;
+                this.grid[i][j].weight = 0;
+            }
+        }
+        this.show();
+    }
+
     clearPath() {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
