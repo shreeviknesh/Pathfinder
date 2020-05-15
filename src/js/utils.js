@@ -65,7 +65,7 @@ function sleep(ms) {
 // Resets the board i.e., the path and the walls
 async function reset() {
     interrupt = true;
-    await sleep(1005 / fps);
+    await sleep(2500 / fps);
     board.reset();
     interrupt = false;
 }
@@ -73,7 +73,7 @@ async function reset() {
 // Removes the path 
 async function resetPath() {
     interrupt = true;
-    await sleep(1005 / fps);
+    await sleep(2500 / fps);
     board.clearPath();
     interrupt = false;
 }
@@ -81,7 +81,7 @@ async function resetPath() {
 // A new board is generated when the window is resized
 async function resizeFn() {
     interrupt = true;
-    await sleep(1005 / fps);
+    await sleep(2500 / fps);
     setSize();
     board = new Board();
     board.show();
